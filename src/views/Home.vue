@@ -1,18 +1,37 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div style="100%;height:800px;">
+      <flow-panel
+        v-if="resultReloadData.id"
+        :resultReloadData="resultReloadData"
+      ></flow-panel>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// eslint-disable-next-line import/extensions
+import FlowPanel from "@/components/ef/run_time_panel";
+import { getDataDefault } from "@/components/ef/run_time_data";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    FlowPanel,
+  },
+  data() {
+    return {
+      resultReloadData: {}, // 画布已完成元素
+    };
+  },
+  mounted() {
+    this.initRunTimeData();
+  },
+  methods: {
+    initRunTimeData() {
+      this.resultReloadData = getDataDefault();
+      console.log("this.resultReloadData...", this.resultReloadData);
+    },
+  },
+};
 </script>
